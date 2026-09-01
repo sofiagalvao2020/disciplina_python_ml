@@ -1,0 +1,1115 @@
+Aula de Python ML
+
+Avaliacao - projeto  e apresentacao final
+
+github e streamlit (permite visualizacao de uma ferramenta online, com leitura em python)
+
+Nao sera cobrada a frequencia
+
+commit final ate 29 de outubroubro
+
+nota
+
+Conceito A – Projeto funcionando;
+Conceito B – Projeto existe, com AED, deploy ou testagem parcial;
+Conceito C – Projeto existe, com AED, deploy e testagem parcial;
+Conceito D – Não, não fiz nada;
+
+banco de dados - criado 
+
+entrega dividida em
+1) AED - Relatorio comentado AI DATA (biblio python). Relatorio no github pre-processamento e pos-processamento 
+(tabela como dos slides em html (da biblio) + notebook markdown com os comentarios do que será feito em detalhes) 
+2) streamlit - deploy (projeto executado)
+3) relatorio PY TEST - teste automatizado do sistema. Arquivo html - coverage report - deve ser executado para 
+cada funcao desenvolvida
+3.1) assim como pelo github - actions - teste automatizado (automatico de cada push). Menos detalhado que do py test
+
+Sistemas a ser desenvolvidos
+
+classificacao, clusterizacao e regressao
+
+Cada aprendizagem incluira:
+    AED
+    testagem unitaria (cada funcao) e de integracao (talvez, sqlite,joblib) automatizadas
+    deploy publico
+
+ENTENDENDO MACHINE LEARNING
+
+algoritmo - sequenvia de passos finitos e organizados que resolvem um problema
+machine learning - diferente dos demais algoritmos, a propria maquina observa os padroes e resolve o problema
+
+O que é machine learning?
+
+primeiro modelo de rede neural - 1943 - conjunto de algoritmos que recebe e devolve dados 
+1950 - publicao de turing - uma maquina pode receber informacoes e ao mesmo tempo ser 
+
+necessario (essencial para que a afirmacao seja verdadeira) x suficiente (ela ja é suficiente para a afirmacao 
+ser verdadeira)
+
+claude shannon - criou a matematica por tras da linguagem binaria
+
+1956 - termo inteligencia artificial e cunhado - uma maquina pode mimetizar o comportamento humano
+
+1958 - primeiro perceptron (rede neural inicial capaz de aprender com dados). primeira rede de 
+unidades de processamento (input + weight + bias) -> net input funcation (media dos inputs) -> funcao de ativacao 
+-> saida
+
+aprendizado de maquina - o modelos ajusta automaticamente seus proprios parametros a partir de dados, com 
+intervencao humana minima
+
+aprendizado de maquina profundo - tecnica de ML que usa redes neurais com camadas ocultas para encontrar padroes
+em grandes conjuntos de dados.
+
+ML -> algoritmos leem um conjunto de dados e com ele desenvolve um modelo para aplicar em outro conjunto de dados 
+(novas observacaoes). Seu principal objetivo é desenvolver o modelo aplicavel sobre os dados, desvendar o
+o padrao e entregar a solucao !!
+
+
+Onde nao cabe ML
+
+- temos todas as observacoes necessarias (sem pergunta)
+- temos o modelo pronto para aplicacao em dados
+- nao temos dados suficientes ou sao inadequados (sem dado nao ha desenvolvimento)
+- dados sem padrao
+
+regressao - tecnicas que permitem encontrar um valor continua
+classificacao - tecnica que permite determinar valores qualitativos (classes)
+
+Geralmente, ML sera mais adequado para respostas de regressao, pois as opcoes de respostas sao complexas (numeros 
+reais) do que uma classificacao (menos respostas possiveis)
+
+- variaveis fortemente correlacionadas (como em estados de uma filogenia) - redundancias
+- quando nao ha correlacao com a variavel dependente.
+
+PADRAO - ALGO QUE PODE SER EXPLICADO MATEMATICAMENTE (mas nao necessariamente é real)
+
+numa linear:
+
+y = a + bx
+
+a - interceptor (corta o eixo)
+b - coeficiente angular (a partir de onde comeca a inclinacao).
+Traz a importancia da 2a variavel. Se 0, X nao importa na resposta.
+x - valor da 2a variavel
+
+Redes neurais fariam a separacao de um padrao ponto a ponto, e nao por uma unica equacao 
+(numa regressao linear, por exemplo). Vantajoso para dados complexos, mas pode levar a overfitting
+se o dado for mais simples (vicio de treinamento).
+
+Algoritmos de definicao de padrao!
+
+SUPPORT VECTOR CLASSIFIER - para classificacao, lineares
+SVM - para regressao, linear
+Arvores de decisao - pergunta, variavel a variavel, a distribuicao dos dados. ex: quem esta acima ou abaixo de trinta?
+
+    Desenhando a Arvores
+
+        v1
+      0 > x-30 > 0
+        |      |
+        |      |
+        V      V
+      V2      v3
+            0 > y-2 > 0
+
+Metricas - retornam a capacidade do modelo responder a pergunta. Num modelo simples, ambos podem responder a pergunta,
+e a metrica de ambos seria a mesma. A diferenca sera a sua validacao em outros dados. O melhor modelo deve ser discutido
+com base na metrica, e com base na explicacao/pergunta atribuida a ela
+
+modelos
+
+regressao linear
+k-means - classificacao por media k vezes
+k-mm - classificacao por vizinhos
+florestas aleatorias - varias arvores agrupadas
+naive-bayes - probabilistico. Probabilidade de conjuntos estarem um no outro, com base em condicao
+regressao logistica - um valor, dividido em 2 grupos
+redes neurais - conjunto de equacoes aplicadas sobre cada input, geralndo uma saida final.
+
+
+Ex: quantas calorias temos no estrogonofe?
+
+1) dados - tabela com dados das amostras (instancias) ex: 50 estrogonofes medidos
+2) estruturar dados
+#### 3) AED - média, mediana e desvio de calorias. Quando os dados nao sao normais, a prob de metricas de AED
+serem muito divergentes é GRANDE, e com isso, seu modelo pode nao ser representativo da realidade
+(e de uma outra amostra). Por isso, é importante fazer a AED para entender melhor a realidade e possibilidade dos dados.
+3) desenvolvimento de modelo - ISSO NAO DEPENDE DE AED
+4) tendo o modelo, faremos a OTIMIZACAO DO MODELO - APROXIMÁ-LO DO QUE QUERO. Essa variacao dos parametros 
+sera manual (ou por uma funcao que o faca)
+5) 
+
+metricas de regressao
+
+Root Mean Square Error RMSE (erro quadratico medio) - calcula a distancia media entre os pontos e a media. 
+raiz quadrada (ao quadrado (média (do erro (distancia real e modelo)))) ADIMENSIONAL
+Quanto menor, melhor == menos erro
+
+Regressao linear multipla - quando o modelo de predicao é dividido por subvalores (de calorias totais, cada
+ingrediente recebe um coeficiente = peso). Pode melhorar um modelo de regressao, mas requer maior detalhamento 
+de dados.
+
+Etapas do aprendizado de maquina
+
+treinamento
+ajuste
+validacao
+teste
+
+Um modelo pode apenas decorar as respostas, e nao aprender padroes - overfitting. Incapaz de generalizar para novas
+amostras. Metricas com erro baixo demais, por exemplo, devem ser um ponto de atencao para overfitting.
+
+Kessi cosicov - teste estatistico
+
+AULA 04/08 - PARA QUEM E MACHINE LEARNING
+
+FLAKE 8 e IpY - Para a otimizacao do codigo python.
+
+Variaveis - categoricas (nominal e ordinal), numerica (continua, discreta)
+
+Quais abordagens existem em ML?
+numericas - regressao (continua ou descreta)
+categoricas - classificacao (geralmente ja tenho as classes/padrao) e clusterizacao (quero descobri padrao/classes)
+
+Tipos de ML
+
+Dados - variaveis independentes servem para treinamento, e a dependente é o rotulo resposta
+
+Nao supervisionada - Clusterizacao ou Regressao
+
+    Nao possui alvo claro - agrupamento por uma caracteristica nao explicita (grupos de gravidade, prognostico em anos)
+    A clusterizacao pode ocorrer por motivos que nao se conhece.
+    Numero de clusters pode nao refletir os padroes de dados (alguns explicitam o numero de grupos e outros sao automaticos)
+    Diversificacao do banco é fundamental
+
+Semi-supervisionada - classificacao ou regressao.
+
+    variavel resposta é inferenciada! nao é previamente observada. ex: media
+    Nesta abordagem nao temos todos os alvos, e sim alguns apenas (missing)
+    Posso usar o padrao das demais variaveis para inferir as faltantes (media, mediana, etc)
+    Abre brecha para inferencias muito normalizadas (viés)
+
+Supervisionada - classificacao ou regressao. 
+
+    Quando ja temos o rotulo, a variavel resposta clara. As demais variaveis independentes que nao sao rotulo sao chamadas 
+    de features ou variaveis da instancia
+
+    A qualidade do modelo é influencidade pelo tamanho do banco - treinamento nao representativoda populacao
+
+    Regressao - ex: aprendizagem para contagem de celulas em campo clusterizacao
+
+Reforço - Clusterizacao ou regressao
+
+    Aprendizagem por feedback. Podemos fornecer um metodo de correcao ao modelo para  ajuste conforme o feedback
+    temos um alvo claro (agente (quem vai fazer), a acao (o que vai fazer, e ambiente (que entrega
+    recompensa e punicao))), mas o algoritmo nao possui as funcoes explicitadas.
+    ex: selecao natural
+
+Data Science
+
+Quais decisoes podemos tomar em ML?
+
+Abordagens possiveis
+
+Estatistica descritiva - descrever dados conhecidos (nenhuma decisao envolvida, uma investigacao)
+
+Estatica inferencial - poucas decisoes envolvidas. A partir de dados, quero descrever padroes discretos, de forma 
+pontual - testes de hipotese pontuais (ANOVA, t-student), se significativo ou nao em dois grupos.
+
+Machine learning - muitas decisoes envolvidas. existe um conjunto de comparacoes, respostas sendo investigadas.
+
+ao final da aplicacao de um modelo de ml, a etapa de teste sempre aplica estatistica inferencial para comparar a 
+populacao treino (amostra) com o teste (representando a populacao). se elas forem semelhantes, o modelo é adequado.
+
+Se nao ha decisoes a tomar -> buscamos entender os dados (est descritiva)
+Se tenho uma decisao -> se sao poucas decisoes (testes locais, quando ha risco) -> estatistica descritiva  
+Se tenho uma decisao -> se sao poucas decisoes (testes locais, em ambiente sem risco) -> inferencial
+Se as decisoes sao muitas, e as respostas nao sao acessiveis -> ML
+
+Objetivos ML
+
+Temos que ter nossa pergunta e objetivo muito claros antes de treinar
+
+Metricas - formas de analise da performance do modelo
+
+regressao
+
+    coeficiente de determinacao r2, 
+
+        Quao bem um modelo de regressao se ajusta a um conj de dados.
+        prob de que seu modelo explique a variavel buscada.
+        varia de 0 a 1 (0 a 100%)
+        soma dos quadrados total (soma dos erros num modelo de media) / soma dos quadrados residuos (soma dos erros no nosso modelo)
+        r2 portanto, exibe a diferenca relativa do modelo desenvolvido em relacao a media
+        quando maior o r2, melhor seu modelo representa a variabilidade da populacao comparado a media.
+                                                                                                invariavel em relacao a variavel de interesse
+    erro medio absoluto (mae), 
+
+        Mede a media da diferenca absoluta entre os valores previstos pelo modelo e os valores observados.
+        ou
+        media do erro das amostras (em modulo)
+
+    erro medio quadratico (mse),
+
+        comum em verificacao de acuracia de modelos, dando maior peso a maiores erros
+        cada erro é elevado ao quadrado individualmente, seguido da media dos erros
+        Quanto maior a distancia, maior o erro da amostra.
+
+
+    raiz do erro quadratico medio (rmse), 
+        raiz quadrada do mse - diminui a penalidade sobre o valor total de mse
+
+    erro percentual absoluto medio (mape)
+        erro é medido em porcentagem
+        media(erro absoluto/observado para cada amostra).100%
+
+    EXPECTATIVAS EM RELACAO AS Metricas
+
+    r2 e mape - porcentagens
+    mae, mse, rmse - adimensionais
+
+classificacao
+
+Se baseia em matriz de confusao (++, +-, -+, --) x = predito, y = real
+                VERDADEIROS
+    acuracia -   VP + VN  / TODOS
+    proporcao de gatos e nao gatos corretamente classificados
+
+    precision - VP / POSITIVOS (VN + FP)
+    proporcao dos dados classificados como gatos realmente eram. Foco no falso +. Todo - realmente é -, mesmo
+    que tenha falso -.
+
+    recall (sensibilidade) = VP / VP + FN
+    dentre todos os classificados como gatos (+), qual a proporcao de verdadeiros +. foco no falso -. Todo +
+    realmente é +, mesmo que tenha falsos +.
+
+    f1 score = Precision x Recall / Precision + Recall
+    Observacao de precisao e recall em um unico numero - um equilibrio das duas mais opostas
+
+clusterizacao
+
+Nao sei a classe, e quais sao as classes. O modelo vai agrupar por semelhanca.
+
+    harabasz - extrinseco. ajuda a identificar o numero ideal de clusters (k) em casos nao supervisionados
+        verifica a densidade e distancia entre clusters (foco extrinsico)
+        quanto maior esse valor, mais bem separados os clusters
+
+    davies bouldin - extrinseco. avalia separacao de clusters e a compactacao.
+        verifica a distancia entre amostras de um cluster, e alem disso, calcula a distancia do centroide do cluster 
+        em comparacao com as amostras do outro grupo.
+        Quanto maior, maior separacao de clusteres+compactacao de grupo
+
+    silhouette - intrinsico. mede a semelhanca de um ponto de dados a seu proprio cluster e com outros clusters.
+        Mede mais a uniformidade do cluster do que a distancia entre clusters. Se mais disperso o cluster,
+        menor a silhouete.
+        prox de +1 - excelente ajuste. amostras muito uniformes e grupos distantes
+        prox de -1 - a amostras deve ter sido classificada errada, pois esta mais proxima de outros clusters
+        do que do que esta classificados
+        prox de 0 - a amostra esta entre medidas de clusters. nao ha clusters bem difinidos
+
+    ari (adjusted rand index) - extrinseco. para analise supervisionada
+        avalia com base em um cluster conhecido. calcula a aplicacao correta das amostras por cluster rotulado
+        1 = agrupamento perfeito
+        0 - agrupamento sem sentido
+        -1 - 
+        para cada ponto, ele calcula a distancia da amostra para o cluster que ele deveria estar (diferente dos 
+        outros ele nao faz calculo entre amostras)
+
+    ami (adjusted mutual information) - extrinseco. tambem supervisionados
+        nao calcula entre cluster, so observa o erro dentro de cada grupo.        
+         1 = agrupamento perfeito
+        0 - agrupamento sem sentido
+        -1 - 
+
+
+Aula 3 - Adquirindo os dados de ML
+
+sklearn - biblioteca muito robusta para analise de dados geral, desde estatistica descitiva 
+ate ml
+
+cada modelo de regressao tera suas vantagens e desvantagens (script 01-aula-02 pasta 
+aulas_teoricas)
+
+Bancos de dados
+
+1960-70: banco de dados hierarquicos e em rede (rotulados e com hierarquia de consulta e 
+resposta)
+
+1980-1990: bancos orientados a objetos - cada informacao é entendida dentro de uma classe 
+(com atributos e métodos - define o que ela tem e como ela se comporta)
+
+1990 - expansao da capacidade de armazenamento e paralelismo (varias requisições em uma mesma
+tabela)
+
+2000 em diante - bancos de dados NoSQL 
+
+Bancos de dados em memoria fisica/ram, Big Data, nuvem e etc (pos 2010)
+
+BANCOS DE DADOS VS TABELAS
+
+O banco de dado é um sistema relacional! Seçoes de dados/processamento coversam entre ai, 
+enquanto as tabelas so exibem o dado, por si proprio
+
+Usados quando precisamos de um sistema organizado e escalavel. Ideal para aplicacoes complexas
+com consultas sofisticadas (que permite uama analise de maior complexidade/requisicao)
+
+DBMS - Sistema de gerenciamento de banco de dados
+Sao os sistemas que permitem que acessemos e interagimos com dados.
+
+sqlite (structured query language) - um DBMS default to Python. Acesso por login, construcao 
+de tabelas e etc
+
+DuckDB - um DBMS de codigo aberto e explicitamente otimizado para tarefas analiticas (analise 
+de dados). Evita sobrecarga da memoria RAM, pois ele acessa o dado diretamente, sem carregar
+o dado ocupando a memoria RAM.
+
+Posso acessar um arquivo gigantesco (que meu pc nao conseguiria ler) - USAMOS DB QUERY!
+
+data_file = 'caminho' #arquivo gigantesco'
+df.to_csv(data_file,index=False)
+db.sql(f'SELECT * FROM read_csv('{data_file}')LIMIT 5')  # usando DB permite acessar sem crashar
+
+DB faz leitura coluna a coluna!
+
+Profiling - biblio que gera relatorio html!!
+
+Estruturacao de Dados em ML
+
+Ausencias
+
+Verificacao de numero de dados, dados faltantes (isna(), isnull()), retirada de 
+dados ausentes (dropna()) retirar duplicatas, preencher faltantes (fillna(),bfill()),
+substituicoes (replace()).
+
+Transformacoes e categoriras
+
+get_dummies() - transforma classes em colunas. do pandas
+one-hot encoding - faz o mesmo. dentro do pre processamento do modelo
+
+Discretizacao - criar variaveis categoricas com base em continuos
+
+qcut() - classificacao com base em quartis
+cut()
+
+Uniao de tabelas
+
+Merge - pandas. 
+concat
+
+Balanceamento - permite que eu iguale as variaveis do meu banco de dados
+
+Seguir script para exemplo de processamento de dados:
+'C:\Users\sofia\Documents\Doutorado\Disciplinas\Sofia_python_ML\Python_ML-2026\disciplina_python_ml\dev\script\aulas_teoricas\02-aula-04_aquisição_2026-07-14.ipynb'
+
+Seguir script para exmplo de aplicacao do ydata para deploy e entregas pre e pos processamento (HTML pre, HTML pos e notebook explicativo!!)
+C:\Users\sofia\Documents\Doutorado\Disciplinas\Sofia_python_ML\Python_ML-2026\disciplina_python_ml\dev\script\aulas_teoricas\ydata-profiling.ipynb
+
+Aplicacao de balanceamento - script SMOTE 
+C:\Users\sofia\Documents\Doutorado\Disciplinas\Sofia_python_ML\Python_ML-2026\disciplina_python_ml\dev\script\aulas_teoricas\SMOTE.ipynb
+
+Aula 4 - Algoritmos ML
+
+Diversos tipos, com diversos niveis de complexidade
+Pegam os dados e constroem um modelo para predicao.
+
+
+- k-Means;
+• DBSCAN;
+• k-NN;
+• Logistic Regression;
+• SVM;
+• Decision Trees;
+• Random Forests;
+• Naive Bayes;
+• Simple/Multiple Linear Regression;
+• Neural Networks
+
+Se as variaveis  dependentes forem qualitativas -> clusterizacao ou classificacao, supervisionada ou nao se voce ja tem os rotulados
+Se as variaveis dependentes forem quantitativas -> regressao, supervisionada ou nao
+
+Algoritmos de ML da disciplina_python_ml
+
+Nao supervisionada - clustering 
+Supervisionada - classificacao e regressao
+
+Algoritmos de Clusterizacao
+
+k-means, dbscan, agrupamento hierarquico, redes neurais
+
+Classificacao
+
+k-nearest neighbour
+regressao logistica
+SVM
+decision Trees
+random forest
+xgboost
+naive bayes
+redes neurais
+
+Regressao
+
+linear simples
+linear multipla
+SVM
+naive bayes
+redes neurais
+
+StandardScaler - para padronizacao dos dados
+
+Z=(x-u)/s     transforma dados para que tenham media 0 e desvio 1, garantindo a normalidade
+
+x: variavel
+u: media
+s: desvio padrao
+
+StandardScaler
+MinMaxScaler
+
+
+Clusterizacao - nao supervisionada
+
+k-means - 1o algoritmo de clusterizacao. particiona dados em k clusters. atribui pontos a um centroide e em seguida recalcula 
+as distancias. faz isso iterativamente ate minimizar ao maximo as distancias ao centroide
+
+Hiperparametros - (parametro - o que entregamos para uma funcao trabalhar) sao o que entregamos para o algoritmo performar.
+São ordens/caracteristicas que entregamos para o algoritmo performar.
+
+k => hiperparametro NUMERO DE CLUSTERS
+
+Determina o minimo e maximo das duas variaveis do caso e chuta um valor intermediario (centroide 1)
+Em seguida, calcula a distancia euclideana do centroide para todos os outros pontos e tira a media (media do erro)
+Numa segunda iteracao, ele chuta outro centroide e calcula o erro, e faz isso continuamente ate encontrar um centroide com 
+menor erro possível.
+
+Metodos para estimar k
+
+inercia - base do metodo do cootvelo. mede a compactacao do cluster a partir do erro/media.
+No grafico n clusters X inertia testamos os K onde ha o ponto de inflexao da curva (cotovelo)
+
+silhueta media - no grafico n de clusters X silhueta media - quanto maior o valor, melhor. Indica a condensacao dos grupos.
+
+BOXPLOT - é interessante observar os grupos em boxplot para a 2 variaveis de interesse, e observar se elas realmente sao
+distintas pela variacao de x e y.
+
+Nao performa bem em mais de 2 variaveis
+
+dbscan
+
+agrupamento com base na densidade dos dados. infere os grupos, nao é um hiperparametro.
+EPSILON = hiperparametro que define um raio especifico de vizinhos por grupo (dentro desse raio epsilon, o erro deve ter um valor
+menor que epsilon). Distancia maxima para que dois pontos sejam vizinhos (do mesmo cluster)
+MIN_SAMPLES - Numero minimo de amostras em uma vizinhanca para que seja considerado um centroide.
+
+Aceita ruido (nao classificados)
+
+Ele comeca com um centroide aleatorio. Se ele for um ponto central (se ele encontrar pontos dentro do epsilon), ele se torna 
+um cluster. Ele cria novos centroides ate que a maior parte dos pontos sejam encontrados.
+
+Valores de cluster negativos na verdade sao o grupo de amostras ruido!
+
+Agrupamento hierarquico
+
+Constroi dendrograma. nao requer grupos pre definidos, forma uma arvore para ser posteriormeente cortada
+
+Calcula a similaridade de todos os pontos entre si, e depois organiza grupos animnados.
+
+Hiperparametros: ambos definem limites de fusao de grupos
+N_CLUSTERS. Padrao 2
+DISTANCE_THRESHOLD. Distancia maxima na qual dos grupos devem ser ser unidos (default None)
+LINKAGE - metodo de ligacao de grupos. default Ward
+METRIC - como o algoritmo mede o espaco entre pontos. default = euclideana
+
+Devemos sempre analisar a arvore visualmente para determinar os grupos
+
+Redes neurais - Autoencoder
+
+Autoencoders sao redes neurais treinadas para reconstruir suas entradas. Funciona na clusterizacao como uma abordagem de 
+reducao de dimensionalidade. Ele por si proprio nao faz o calculo de distancia entre dados para determinar grupos. 
+Constroi eixos representativos (nao sendo uma dimensao especifica).
+
+Ao apresentar a distribuicao dos grupos, portanto, sera sempre de 2 algoritmos nesse caso (redes neurais+dbscan, por exemplo)
+
+Devemos testar todos e ver pelas metricas qual performou melhor (silhouete, calinski, davies Bouldin, ari e ami)
+
+##scripts aula 3 - aplicacao das analises de cluster
+
+C:\Users\sofia\Documents\Doutorado\Disciplinas\Sofia_python_ML\Python_ML-2026\disciplina_python_ml\dev\script\aulas_teoricas\03-aula-05_02-cluster_2026-07-14.ipynb
+Antes de aplicar o algoritmo, aplica-se a padronizacao dos dados (media= 0 e desvio = 1)
+Para cluster
+1) grafico de distribuicao dos dados
+2) calculo do cotovelo para kmeans - variando valores n_cluesters
+3) Plot cotovelo - inertia vs n_clusters
+4) treinamento
+5) metricas
+
+#os demais seguirao esse padrao, exceto redes que apos a sua aplicacao aplicamos outro algotimo para clusterizar
+
+Classificacao - supervisionada
+
+Variavel dependente explicita - alvo.
+O algortimo vai buscar o padrao das variaveis dependentes para construir a logica que gera os rotulos.
+Sempre precisamos dividir o banco em exploracao (treino 60% - pode ser reutilizado para ajuste e validacao 30% - onde 
+obtemos metricas de avaliacao) e 10% em teste, usado como base de testes estatisticos.
+
+K-Nearest neighbors
+Algoritmo nao parametrico (nao requer normal). classifica um novo ponto de dados com base na classe majoritaria dos seus 'k' 
+vizinhos. calcula a distancia entre esses vizinhos e atribui a classe mais comum no grupo.
+
+Metrica - matriz de confusao! acuracia (proporcao de valores corretamente classificados), precisao (preocupação
+maior com valores realmente positivos), recall (prioriza os realmente negativos) e f1 score (maneira de observar em um unico
+numero precisao e recall).
+
+Regressao logistica
+
+Preve a probabilidade de um resultado categorico com base em variaveis independentes em SIGMOIDE.
+O ponto de inflexao da sigmoide é o divisor das duas classes (50%)
+
+Um pouco de probabilidade - se aplica a todos os modelos
+
+Probabilidade = qual a prob de um valor max ou min dos dados estar presente em uma amostragem?
+
+Risco do evento (risk event) = qual a prob de um vaor max ou min estar em uma classe determinada?
+
+Chance do evento (odds) = qual a prob de um max ou min estar em alguma classe? (classificado ou ruido?)
+
+Razao de chance do risco (odds ratio) = razao entre as chances de dois eventos estarem na classe
+
+Logaritmo da chance (log ratio) = log neperiano da chance. para valores muito discrepantes
+
+Forca explicativa (woe) = log neperiano da razao de chance. ex: a forca explicativa da classe x em relacao ao grupo 1 é menos
+provavel para max (-0,25) do que para min (0,21). Representa a capacidade explicativa da classe sobre outra, ou a diferenca de 
+uma classe sobre a outra.
+
+A regressao pode ser feita de diversas formas:
+
+A construcao manual desta regressao nos retorna - logit 
+
+coef - coeficiente beta para analise (inclinacao)
+std err = erro padrao dado o coef
+z - estatistica z- coef/std err
+p>z - probabilidade do coef ser zero. Sendo 0 a variavel x é irrelevante, ou nao explica os dados
+CI- intervalo de confianca
+
+Area abaixo da curva ROC - ROC é a relacao de falso positivo e verdadeiro positivo. Quanto maior a area, maior acerto, e quanto menor,
+maior a quantidade de falso positivos. é a metrica AUC.
+
+GINI - mais usado em distribuicoes nao normais. O é igualdade perfeita, 1 desigualdade maxima. Taxa de esforco. o qual complexo
+teu modelo tem que ser para explicar os seus dados
+
+KS - teste para determinar se a separacao realmente é verdadeora. Se as linhas nao se cruzam houve boa classificacao.
+
+Os resultados da regressao sao sempre probabilisticos!
+
+SVM - Support Vector Machine
+
+para tarefas de classificacao e regressao. Funciona encontrando um hiperplano, para dados que nao podem ser 
+separados linearmente! Utiliza um kernel (transforma dados). Pontos mais proximos da classe so assim classificados.
+
+Tracamos um conjunto de linhas para separar grupos, mas a posicao delas pode favorecer uma ou outra classe (por area de 
+grafico pra cada classe)! A maquina de suporte fara isso iterativamente para detectar a linha mais favoravel, e para
+alem da linha, manipula as duas dimensoes, criando uma 3a dimensao ficticia (matematica, o kernel), e manipula a posicao 
+relativa desses dados para separa-los da melhor forma (ao inves de linha, o HIPERPLANO)
+
+Hiperparametros
+
+LINEAR = kernel mais simples para dados linearmente distribuidos. hiperplano linear.
+´POLY = kernel de dados nao lineares, relacoes curvas mais complexas
+RBF (radical basis function) = kernel Gaussiano padrao para SVC e SVR. Kernel que gera uma dimensao superior para construção 
+do hiperplano.
+SIGMOID - alternativa ao rbf. Cria funcao sigmoide para o hiperplano!
+
+Quando utilizamos varias variaveis (multiparametrica), rodamos novamente o SVM, e devemos sempre testar diferentes kernels!
+
+Decision Trees - decisao hierarquica
+
+Semelhante a um fluxograma de decisoes com base na pergunta de cada variavel
+Hiperparametros
+MAX_DEPTH - profundidade. Quantas camadas ela vai ter
+MIN_SAMPLES_LEAF - numero minimo de variaveis por folha
+CCP_ALPHA - cost complexity pruning path. quanto maior o numero de perguntas (comprimento) para poda (segregacao/decisao), maior
+o CCP, maior a complexidade da arvore. LEMBRAR DA NAVALHA DE OCKHAM
+
+Pode ser multiparametrica!! Permite inclusao de diversas dependentes
+
+Random Forests - decisoes hierarquicas
+
+Algoritmo de aprendizado de maquina de conjunto (ensamble) que combina multiplas arvroes de decisao para producir uma versao unica,
+mais precisa e estavel
+Versatil para aprendizagem supervisionada, utilizado para classificacao e regressao.
+
+Mais utilizado que as arvores de decisao por si mesmas. Aumenta a robustez da analise.
+Pode ser feita de varias formas:
+
+1) Bootstrap - cada arvore da floresta e treinada em subconjuntos diferentes e aleatorios, amostrados com reposição. Cada arvore
+tera um score de qualidade associado a ela, com peso especifico. (amostragem de colunas)
+
+2) Selecao de features - em cada no, apenas um subconjunto aleatorio de atributos é considerado para decidir a melhor divisao, em vez 
+de todos os atributos. Isso garante que as arvroes sejam diversas entre si.
+
+
+A escolha da arvore deve ser feita conforme a Navalha de Ockham - menos camadas, melhor
+
+Hiperparametros
+MAX_FEATURES - n de colunas usado em cada decisao 
+OUT OF BAG - amostra de instancia nao utilizada em determinacao de nenhum no 
+MIN-SAMPLES-LEAF - quantidade de elementos minimos nas folhas
+MAX-DEPTH - profundidade maxima
+N-ESTIMATORS - numero de arvores
+
+Verificacao de peso e qualidade de arvores - GINI (pureza, calcula numero de estimadores ideal)
+
+Definicao automatizada de hiperparametros - GridSearch. treinamento exaustivo de hiperparametros (exponencial)
+estimator = modelo 
+param_grid = dicionario de parametros a se variar
+cv = amostragem! Numero de folds para validacao cruzada Ao entregar conju de treino, ele vai subdividir esse grupo , gerar todas
+as arvores e juntar, de forma iterativa (se cv = 5, fara 5 vezes). Assim ele vai buscar fugir o maximo possivel de overfitting
+verbose = desliga os sinais de saida do processamento 
+n_jobs = selecao de nucleos para trabalho (-1 = uso todos os disponiveis) - paralelisando o processo
+
+GBM (GRADIENT BOOSTING MODEL) - metodo de ensamble  -  combina modelos fracos de modo a resultar em um forte. Construcao sequencial de modelos, cada um 
+tentando resolver o erro anterior (boosting). Pega a saida de uma arvore e coloca o resultado como uma feature da proxima.
+Bootstrap unia as arvores com os scores, boosting pega a saida de uma e coloca como entrada do proximo.
+
+XGBoosting - variacao do GBM
+Kaggle - campeonatos de machine learning
+
+A partir de uma media das observacoes (target), calcula o residuo entre a media e o target de cada linha, 
+Ajusta a rvores de decisao, usanod o residuo obtido como target da proxima arvore, e treina uma nova arvore.
+Ele faz isso iterativamente ate um limite definido
+
+Hiperparametros
+
+N_ESTIMATORS - N de arvores
+LEARNING RATE - taxa de corregao do erro - se a metrica n melhorar da forma que deveria, ele para (ETA)
+MAX DEPTH - profundidade de arvores
+MIN SAMPLES LEAF - minimo de amostras por folhas
+
+Naive bayes - baseado em Bayes - Bayesiana, probabilistico
+
+Bayes - opera sobre a premissa de que todas as features sao condicionalmente independentes uma da outra, dado o rotulo da classe.
+Assume independencia entre classes.
+
+Teorema de Bayes calcula a probabilidade de um evento com base no conhecimento previo de outro evento, essencialmente 
+encontrando a classe mais provavel para um novo ponto de dado. Se opoe a frequencias.
+
+P(H|E) = P(E|H)
+
+
+EX: para um teste positivo, que tem acuracia de 90%, qual a probabilidade de estar certo?
+
+prob de positivo no teste = 90% E
+prob de positivos na pop  = 1% H
+
+Chance de ser verdadeiro no teste = 90%
+chance de verdadeiro na pop = 1%
+
+                POPULACAO                       TESTE
+1000 pessoas -> 90% negativo (990 negativas) -> 891 90% VN e 99 FP (10% de erro do teste)
+             -> 10 positivas (1% pop)        -> 9 VP, 1FN
+             
+Nesse caso,
+Positivas para o teste
+99 + 9 = 108 (positivos do teste)
+
+VP/positivos para o teste = 9/108 = 8,3%
+
+O teorema pode acumular quantas features/variaveis quisermos - DNA = nucleotideos = features
+
+Naive Bayes
+Permite diferentes modelos para implementacao
+
+GaussianNB = permite regressao
+MultinomialNB = dados de contagem, discretos
+BernoulliNB = dados binarios ou booleanos - usado mais para classificacao. Dado o valor da probabilidade posterior, ele 
+aplica sobre uma sigmoide para dar uma classe (acima de 0.5 +, abaixo -)
+
+Hiperparametros
+ALPHA = suavizacao - modelos MultinomialNB e BernoulliNB. Adiciona um valor qualquer para impedir divisao por zero
+FIT PRIOR - adicionar o fator a priori - (prob na populacao P|H). Se o resultado anterior do treinamento vai influenciar o 
+proximo teste.
+
+
+Redes neurais - define classes por si propria
+
+Implementacao dos modelos nos scripts
+
+clusterizacao:
+dev/script/aulas_teoricas/03-aula-05_02-cluster_2026-07-14.ipynb
+
+classificacao:
+dev/script/aulas_teoricas/03-aula-05_03-classif_2026-07-14.ipynb
+
+Regressao 
+
+Determincao de um valor - target quantitativo.
+
+Linear simples
+funcao linear simples -> y = interceptor + coeficiente.X + erro
+
+Erro calculado sempre em relacao a media do target - SQT, SQM, SQE e r2 (coef de determinacao = SQM/SQT)
+r2 - o quanto que a sua equacao explica a variacao dos dados (erro da media/erro do modelo)
+R = descreve a correlacao dos dados. 
+R Spearman - analisa a correlacao (obs e pred) em casos nao normais
+
+Linear multipla
+Equacao linear agora incrementa outros coeficientes (X)
+
+y = interceptor + coef1.X1 + coef1.X2 + coef3. X3... + E
+
+Ao aplicar o modelo de regressao, analisar sempre a descricao dos indices tabelados
+
+coef da variavel, std err - erro padrao , z - estatistica Z= coef/std err, p>z - p valor de Z, e CI
+
+Observamos sempre esses indices para estimar a importancia das variaveis (seu poder explicativo dos dados). Ex: P>z muito alto...
+
+Outros valores da metrica: R2, AIC e BIC - qualidade do ajuste com a complexidade do modelo, OMNIBUS - testar se nao segue uma 
+distribuicao normal (entrega probabilidade), Jarque-Bera - testar se nao segue uma distribuicao normal (entrega probabilidade), 
+Durbin-Watson - teste de autocorrelacao de residuos (quanto maior o modelo, melhor a autocorrelacao dos residus) e Kurtosis - 
+presenca de outliers.
+
+SVM 
+
+constroi o hiperplano a partir de uma dimensao de suporte (kernel). O ponto onde o hiperplano corta o kernel servira de base
+para construcao da regressao.
+
+Hiperparametros
+C - parametro de regularizacao (learning_rate/taxa de erro, se a variacao do erro entre rodadas for maior que learning_rate,
+ele para de buscar). A intensidade da regularizacao e inversamente proporcional a C. Sempre positivo. Penalidade l2 
+ao quadrado
+Kernel - especifica a funcao do kernel. Define se o hiperplano desenhado sera linear, sigmoide, polinomial.
+gama = coeficiente para o kernel, angulo das curvas desenhadas - determina o numero de valores que ele deve separar nas classes
+
+scoring = amostra os dados por iteracao e, com base em uma metrica fornecida, a taxa de erro.
+
+Naive Bayes
+
+probabilistico. Dado uma variavel, qual a prob de outro. 
+prob de um ensaio dado a pop
+P(H\E) =   P(E|H)    *  P(H)/ P(E)
+        prob da pop/prob teste 
+
+Mesmos hiperparametros descritos na classificacao
+
+Redes neurais
+
+Para regressao, o output é modificado. O compilador retora os valores de interesse.
+A ultima camada sera sempre 1, se for classificacao, o n de classes sera o numero de neuronios de saida
+
+Loss - indica a aprendizagem, a diminiuicao progressiva da perda é importante para indicar aprendizagem.
+MAE - taxa de erro.
+
+Redes neurais sao um sistema de algoritmos, pois diferente dos demais ele nao aplica uma equacao para descrever os dados,
+mas cada neuronio da rede é uma equacao com:
+
+        NEURONIO 1
+input . peso . taxa de aprendizagem -> funcao de ativacao -> output
+Y = B(random) + wx (peso. var ind=input) + b (bias - taxa de erro, variacao adicional para ajuste)
+
+        NEURONIO 2                  |
+input . peso . taxa de aprendizagem |
+
+MATRIZ DE NEURONIOS SE SOMAM PARA FUNCAO DE ATIVACAO -> OUTPUT
+O valor do neuronio (Y) sera jogado para a saida, e sera propagado se passar o threshold da funcao de ativacao
+
+na camada final, a saida sera o numero de respostas. Se regressao, 1, se classificacao, n classes...
+A funcao de ativacao vai determinar se um neuronio deve ser ativado ou nao, transformando a entrada ponderada em um sinal 
+de saida. Esta funcao pode ser de varios tipos (sigmoide, tangente...), onde cair o valor do neuronio, definimos se vai se propagar
+ou nao
+
+Havendo propagacao, o neuronio passa para todos os neuronios da camada interna a ele utiliza o Y da anterior como x na nova camada.
+Se chegarem 2 Y da camada anterior, ele fara o calculo da sua equacao. Se 2 valores passarem pela funcao de ativacao, ele fara
+uma media, propagando para todos os neuronios da camada seguinte.
+
+Algoritmo de otimizacao - BACKPROPAGATION
+Apos a corrida ate a camada de saida, ele calculara o erro das predicoes com o observado (rotulo). Com esse erro, ele fara todo 
+o caminho de volta e gera novos valores para cada neuronio das camadas anteriores (cada neuronio tem seus valores aleatorios unicos).
+Corre novamente e calcula o erro, calculando o residuo (diferenca dos erros). A ideia e minimizar o residuo.
+
+A determinacao da melhor topologia é testada manualmente, nao tem como usar o GridSearch, exceto se for uma pre-determinada.
+
+A perda sera o nivel de ajuste de residuos de erro. Conforme o residuo é minimizado, a perda diminui.
+
+O reajuste dos neuronios durante o backpropagation sera feito com base no residuo, e a funcao de otimizacao impede com que ele 
+simplesmente siga diminuindo o erro, a fim de evitar que ele se perca em um minimo local (vale), e nao buscar o minimo do residuo
+global.
+O ajuste das variaveis dos neuronios é feito por um vetor chamado GRADIENTE
+
+    Tipos de algoritmos de otimizacao
+    SGD
+    SGD com momentum
+    Adam - mais utilizado
+
+Hiperparametros
+Funcao de Perda (metrics)= regressao(erro quadratico medio, erro abs medio), class(entropia cruzada binaria- 2 classes, 
+categorical class entropy - quando tem mais de 2 classes). 
+Metrica - quais metricas de avaliacao a utilizar (varia se regressao ou classificacao)
+epochs = quantas sao as rodadas de foward e backpropagation
+batch=size = numero de exemplos de treinamento usados na iteracao (sub-amostragem e treino = cross_validation em outros algoritmos)
+verbose = envio de mensagens durante a execucao
+
+Adicionais
+
+EarlyStopping - biblio que permite encerrar mais cedo a analise
+monitor = 'val_loss' monitora a loss (pode monitorar metrica, opr exemplo)
+patience = 10 (interrompe apos 10 epochs sem melhora do residuo)
+
+Posso colocar o gridsearch para trabalhar, mas tenho que construir a arvore, e depois inseri-la como input do gridsearch
+Para isso, o KerasClassifier compila a arvore em um objeto. Esse sim pode ser entendido pelo GridSearch
+
+regressao:
+dev\script\aulas_teoricas\03-aula-05_04-regressão_2026-07-14.ipynb
+
+#Aula 4 - Treinamento de verdade
+
+Tunning - quando ajusto algo pos treinamento, para validacao.
+Feito sobre os dados de teste. Amostragem em cross-validation por exemplo.
+cross_validation
+
+Debugging - ajustes pos validacao, antes do novo treinamento.
+Feito sobre os dados de validacao, otimizando metricas
+GridSearch
+
+Estatistica - comparacao de teste, pontual. Apos treinamento e validacao em dados separados.
+Testes estatisticos variados (H0 e H1), qui2, t-student. Os grupos devem ser iguais (predito x observado)
+
+#Aula Estruturacao machine learning
+
+AED - Estatistica descritiva, importante etapa na Estruturacao. Tendo essas informacoes, poderemos tomar decisoes melhores
+
+ydata-profiling - AED pronta.
+Comecar essa semana a mexer com os dados - dfs 07!!
+
+#Aula producao
+
+POO - programacao orientada a objetos utilizando classes e objetos para organizacao de sistemas complexos
+
+Conceitos basicos
+
+Classe: molde ou planta de um objeto - ex: a ideia de um carro
+Metodo: uma funcao, uma acao associada a uma classe. Ex: read_csv(). Pode receber argumentos!
+
+O metodo é uma funcao inerente da classe, é basica. Se a funcao for externa a classe, é uma funcao
+
+Atributo: caracteristica associada a uma classe. Ex: shape. Nao recebe argumentos
+
+Toda biblioteca É uma classe
+
+Abstracao: o que algo precisa ter para ser daquela classe. Ideias basicas de um objeto pertencente a uma classe
+
+Objeto: instancia da classe. criacao real baseada na classe.
+
+4 pilares da POO
+
+    - Encapsulamento - escondemos os detalhes internos de funcionamento e mostrar somente o necessario. Controla o trabalho
+    - Heranca - passar as caracteristicas e metodos de uma classe pai para um classe filha para evitar redundancias
+    - polimorfismo - permite que a mesma funcao funcione de formas diferentes dependendo do objeto que executado
+    - abstracao - focar apenas no que e essencial para o problema no momento
+
+Cada metodo, portanto, deve fazer apenas uma coisa sobre a entrada, e devolver apenas uma coisa!
+
+Ao criar uma classe, temos que incluir os metodos e atributos dessa classe. É uma boa pratica sempre testarmos os metodos conforme 
+os criamos. Para isso podemos aplicar testagens automatizadas. 
+
+Testagem automatizada
+Uso de programas e ferramentas para testagem dos metodos aplicados. Podem ser
+
+Testes unitarios - validam pequenas partes isoladas do cogido, como unicad funcao
+Testes de integracao - verificam se diferentes partes do sistema ou servicos funcionam bem juntos
+Testes ponta a ponta - simulacao real do usuario na tela do sistema do comeco ao fim
+
+ao diferenciar um metodo e funcao, temos Sempre
+
+METODO = inerente da classe, estara na criacao da classe e recebe parametro SELF. SELF determina para o python que este metodo É
+exclusivo da classe!
+
+metodo(self, param1, param2)
+
+FUNCAO - nao tera o parametro self na sua descricao!!
+
+funcao(param1, param2)
+
+CI/CD - integracao continua, continua entrega (deploy)
+
+O conceito de integracao continua envolve
+Envio constante - devs mandam pequenas alteracoes de codigo varias vezes ao diante
+Testes automaticos - cada alteracao roda testes de unidade e integracao para achar erros logo no intrinsico
+
+
+#Aula metricas de algoritmos clusterizacao
+ver aula Selecao de algoritmos!!
+C:\Users\sofia\Documents\Doutorado\Disciplinas\Sofia_python_ML\Python_ML-2026\disciplina_python_ml\aulas\08-seleção_algoritmos_2026-07-21.pptx
+ver script
+C:\Users\sofia\Documents\Doutorado\Disciplinas\Sofia_python_ML\Python_ML-2026\disciplina_python_ml\dev\script\aulas_teoricas\07-aula-09-02-treinamento_cluster_2026-07-26.ipynb
+
+Utilizando a df processada (8 variaveis), analisou as variaveis par a par para ver qual par teria maior capacidade de separacao
+em grupos - clusterizacao so usou 2 variaveis
+
+Rodou kmeans, dbscan e aglomerativa - obteve metricas e gerou graficos para comparacao. para os 3, rodou cross validation 100x com 
+os melhores hiperparametros (validacao). Agora sim para treinamento, rodamos essa ultima versao com os melhores hiperparametros
+
+A clusterizacao deve acontecer da mesma forma no treino e no teste para se seja validado
+
+Esta analise do guilherme se baseou no desenho de uma classe - clustering.py - classe permite testar todos os modelos de 
+clusterizacao
+
+script - C:\Users\sofia\Documents\Doutorado\Disciplinas\Sofia_python_ML\Python_ML-2026\disciplina_python_ml\dev\script\aulas_teoricas\src\clustering.py
+Feature selection deve ser manual - observacao grafica das variaveis 
+
+#Aula classificacao e regressao
+
+Debugging e tuning - amostragem repetida, geracao de matricas e otimizacao do algoritmo - selecao de hiperparametros +
+cross_validation + feature selection (filtragem de variaveis informativas)!
+
+Algoritmos de classificacao - SVM, Decision Tree, K neighbour (KNN), Regressao logistica, Random Forest, Redes Neurais, Naive 
+Bayes
+
+Aplicacao com base na classe - classifier.py
+C:\Users\sofia\Documents\Doutorado\Disciplinas\Sofia_python_ML\Python_ML-2026\disciplina_python_ml\dev\script\aulas_teoricas\src\clustering.py
+
+script aplicacao
+C:\Users\sofia\Documents\Doutorado\Disciplinas\Sofia_python_ML\Python_ML-2026\disciplina_python_ml\dev\script\aulas_teoricas\07-aula-09-03-treinamento_classif_2026-07-28.ipynb
+
+Tendo target, o objetivo é aprender os rotulos e generalizar!
+
+Algoritmos de regressao - regressao linear simples e multipla, SVM, redes neurais, Naive Bayes. 
+
+Nesses casos, para definirmos um valor numerico target fizemos uma seleção com base nos valores de Inferferon (IFN-y), pois nas
+aplicacoes de algoritmo de classficacao anteriores ele foi determinado como importante em todos os modelos!
+
+fazer a regressao com correlatas porque ela engloba varias variaveis
+
+script treinmaneto
+C:\Users\sofia\Documents\Doutorado\Disciplinas\Sofia_python_ML\Python_ML-2026\disciplina_python_ml\dev\script\aulas_teoricas\07-aula-09-04-treinamento_regressão_2026-07-28.ipynb
+
+a aplicacao se baseia na classe regression.py
+C:\Users\sofia\Documents\Doutorado\Disciplinas\Sofia_python_ML\Python_ML-2026\disciplina_python_ml\dev\script\aulas_teoricas\src\regression.py
+
+A aplicacao do treinamento de regressao, devemos prestar atencao no GridSearch, que sera diferente para redes neurais em 
+comparacao aos demais algoritmos
+
+calculo de volume de treino para os algoritmos temos que checar os hiperparametros, para calculo de volume de treinos em
+rede neural, teremos que considerar:
+
+threshold, k, optimizer, epochs, batch-size, activation1, activation2 -> multiplizados por todos os hiperparametros de cada 
+variavel 
+
+Tudo isso multiplicado por 5 folds de cross_validation -> por isso as redes sao tao custosas, e por isso so deve ser aplicado
+quando os dados sao muito complexos (1 milhao de dados)
+
+#Aula treinamento e deploy
+
+banco de validacao e treino tem o mesmo objetivos (troca de hiperparamentros, feature selection e cross validation), mas os 
+dados de validacao sao sempre muito menores! Por isso, a depender da qualidade dos dados (muitas variaveis com poucas 
+instancias) -> é importante considerar reduzir o banco (como fizemos nos nossos dados)
+
+Quantas variaveis utilizamos?
+    nao é necessario usar todas as variaveis (sempre lembrar no balanco de complexidade com instancias)
+    a menor correlacao é sempre melhor
+    maldicao da dimensionalidade -> nao adianta ter muitas variaveis se sao poucas instancias -> acumulo de ruido
+    nem todo dado é informativo!
+
+Estruturacao
+    Missing values
+    Valores constantes
+    Dados com alta correlacao
+    Balanceamento
+
+Transformacoes
+    StandardScaler - padronizacao dos dados utilizando o desvio -> para media 0 e sd 1
+    Normalizacao - transforma os dados pela amplitude para que tenham dist normal
+    Mudancas de escala - log, exp...
+    OneHot Encoder - permite transformar dados categoricos em booleanos (get dummies sem ser do pandas)
+
+DEBUGGING
+
+Selecao de variaveis - treinamento e validacao!
+    Feature selection - aplicado pelo sci-kit learning
+
+Ajuste de parametros
+    GridSearch - busca exaustiva -> cuidado com o escalonamento de buscas
+
+
+Cadeia de Processos
+
+Pre-processamento
+    funcao Pipeline - pre-processamento, selecao de variaveis e estimador em um unico objeto
+    (StandardScaler, function transformer - desenho da rede neural e column transformer - aplica o desenho da rede, onehotencoder)
+
+Tuning 
+    select k best - busca de autocorrelacao com base num teste estatistico (f_regression)
+
+TREINAMENTO DO MODELO
+
+Debugging
+    GridSearch
+    RandomizedSelectSearch - amostragem de estados de hiperparametros usado nas redes neurais (para evista a busca exaustiva
+    infinita para os hiperparamentros de rede neural)
+
+Metricas de Teste
+
+Clusterizacao
+    Qui quadrado - chi1_stat
+    ari-score (calculo de Adjusted Rand Index) - metrica de similaridade
+
+Classificacao
+    Qui quadrado contingencial- chi2_contingency
+
+Regressao
+    KS
+    Teste t
+    mann-whitney
+
+Todos esses algoritmos rodados serão entregues para o streamlit executar a partir do arquivo main.py -> paginas.py -> 
+que puxa tudo o que é executado para construcao web (marcacao + dados) = arquvios de classe clustering.py, claasification.py
+e regression.py
+
+O botao clustering na pagina web deve permitir a troca de variaveis para agrupamento. nesse caso o modelo roda novamente
+recebendo esses parameetros do usuario. Os outros dois estao salvos em cache para exibicao. Esses dois so rodam novamente
+os testes estatisticos
+
+#apicacao streamlit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
