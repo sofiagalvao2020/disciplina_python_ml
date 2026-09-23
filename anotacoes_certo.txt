@@ -202,7 +202,7 @@ Supervisionada - classificacao ou regressao.
 Reforço - Clusterizacao ou regressao
 
     Aprendizagem por feedback. Podemos fornecer um metodo de correcao ao modelo para  ajuste conforme o feedback
-    temos um alvo claro (agente (quem vai fazer), a acao (o que vai fazer, e ambiente (que entrega
+    temos um alvo claro (agente (quem vai fazer), a acao (o que vai fazer), e ambiente (que entrega
     recompensa e punicao))), mas o algoritmo nao possui as funcoes explicitadas.
     ex: selecao natural
 
@@ -1069,7 +1069,24 @@ O botao clustering na pagina web deve permitir a troca de variaveis para agrupam
 recebendo esses parameetros do usuario. Os outros dois estao salvos em cache para exibicao. Esses dois so rodam novamente
 os testes estatisticos
 
-#apicacao streamlit
+#aplicacao dos teste sunitarios
+
+Ao rodar o arquivo testes_python.sh, ele vai gerar o relatorio de cobertura para todos os testes unitarios dos arquivos.
+Devemos rodar esse no terminal e salva o html do teste de cobertura para toda a pasta da aplicacao.
+
+RODAR AO FINAL DE TUDO -> .dev/testes_python.sh <id conteiner> <pasta de teste>
+
+
+Rodando tudo
+
+CHAMAMOS
+ _main_ -> paginas.py 
+           classe PAG -> exibe a pagina com os 3 modelos
+                        através do METODO MÉTRICAS
+                                                 -> chama clustering.py, 
+                                                          classify.py e 
+                                                          regression.py, cada um em sua classe na pasta modelos
+                                                                                    -> executam o modelo e devolvem para exibição em main
 
 
 
