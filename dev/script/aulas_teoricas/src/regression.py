@@ -52,7 +52,7 @@ class Regression:
         Parâmetros
         ----------
         df : pd.DataFrame
-            DataFrame contendo as features e a coluna alvo 'IFN-γ'.
+            DataFrame contendo as features e a coluna alvo 'PPD_log'.
 
         Métodos
         -------
@@ -62,8 +62,8 @@ class Regression:
 
     def __init__(self, df: pd.DataFrame) -> None:
         self.df = df
-        self.X = df.drop("IFN-γ", axis=1)
-        self.y = df["IFN-γ"]
+        self.X = df.drop("PPD_log", axis=1)
+        self.y = df["PPD_log"]
 
     def __obter_metricas(
         self, grid_search: GridSearchCV | RandomizedSearchCV, modelo: str
@@ -168,7 +168,7 @@ class Regression:
                     "num",
                     StandardScaler(),
                     (
-                        self.df.drop("IFN-γ", axis=1)
+                        self.df.drop("PPD_log", axis=1)
                         .select_dtypes(include=["number"])
                         .columns
                     ),
@@ -346,7 +346,7 @@ class Regression:
             y_fit = self.y.astype(np.float32)
             grid_search.fit(self.X, y_fit, nn__callbacks=[early_stopping])
         else:
-            grid_search.fit(self.X, self.y)
+            grid_search.fit(self.X, self.y)   ##################
 
         print("Grid Search concluído.")
         print("=" * 50)

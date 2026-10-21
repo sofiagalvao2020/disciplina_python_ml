@@ -279,6 +279,7 @@ class Clustering:
             print(f"Adjusted Mutual Info Score -> {ami}")
 
             # Graficos de relação entre as variáveis e os clusters
+            
             self.__grafico_scatter(hue="classe")
             self.__grafico_scatter(hue=cluster_labels)
             self.__grafico_box(cluster_labels=cluster_labels)

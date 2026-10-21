@@ -31,15 +31,14 @@ from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_classif
 
 # Métricas da classificação
-from sklearn.metrics import (
-                                classification_report,
-                                confusion_matrix,
-                                ConfusionMatrixDisplay,
-                                accuracy_score,
-                                precision_score,
-                                recall_score,
-                                f1_score,
-                            )
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import f1_score
+
 
 class Classifier:
     """
@@ -148,8 +147,8 @@ class Classifier:
         best_model = grid_search.best_estimator_
         y_pred = best_model.predict(self.X)
 
-        print("\n--- Desempenho no Conjunto de Teste ---")
         print(f"Acurácia final: {accuracy_score(self.y, y_pred):.4f}\n")
+        print(f"F1 score final: {f1_score(self.y, y_pred, average="weighted")}\n")
 
         return None
 
@@ -238,6 +237,8 @@ class Classifier:
                 ),
             ]
         )
+        print(preprocessor.columns)
+        
         return preprocessor
 
     def __knn_classify(self) -> tuple[Pipeline, dict]:
