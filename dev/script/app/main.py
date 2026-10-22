@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import streamlit as st
 
-from src.acesso_data import acesso_data_test, acesso_data_icon
+from src.acesso_data import acesso_data_test, acesso_data_icon   
 from src.paginas import Paginas
 
 
@@ -27,7 +27,7 @@ def pagina_estrutura() -> str:
         str: Mensagem de sucesso.
     """
     st.set_page_config(
-        page_title="FAcPyML", layout="wide", page_icon=acesso_data_icon()
+        page_title="SF_PyML", layout="wide", page_icon=acesso_data_icon()
     )
     st.markdown(
         """
@@ -44,10 +44,13 @@ def pagina_estrutura() -> str:
     )
 
     title = "Métricas de Modelos de Machine Learning"
+    subtitle = 'Relatório Sofia Feronato 2026'
     st.markdown(
         f"<br><h3 style='text-align: center; '>{title}</h3>", unsafe_allow_html=True
     )
-
+    st.markdown(
+        f"<br><h3 style='text-align: center; '>{subtitle}</h3>", unsafe_allow_html=True
+    )
     return "Ajustado"
 
 
@@ -75,6 +78,6 @@ def logo_datalab() -> str:
 
 if __name__ == "__main__":
     pagina_estrutura()
-    pagina = Paginas()
-    pagina.metricas()
+    paginas = Paginas()
+    paginas.metricas()
     logo_datalab()

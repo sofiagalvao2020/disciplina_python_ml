@@ -4,7 +4,7 @@ import streamlit as st
 from joblib import load
 from pydantic import validate_call
 
-from src.acesso_data import acesso_data_banco
+from src.acesso_data import acesso_data_banco #checado ok
 from src.modelos.clustering import Clustering
 from src.modelos.classifier import Classifier
 from src.modelos.regression import Regression
@@ -22,14 +22,13 @@ class Paginas:
         """
         # Importando os dados de treino e teste
         banco = acesso_data_banco()
-        link = banco + "df_estruturada/"
+        link = banco + "df_estruturada_Sofia/"
         datasets = [link + i for i in os.listdir(link) if ".csv" in i]
         df_test = pd.read_csv(datasets[0])
         df_train = pd.read_csv(datasets[1])
         df_valid = pd.read_csv(datasets[2])
 
         return df_train, df_valid, df_test
-
     @st.cache_data
     @validate_call
     def busca_dados_class(_self) -> tuple[dict[str, pd.DataFrame], pd.DataFrame]:
@@ -41,10 +40,10 @@ class Paginas:
         """
         # Importando os dados de treino e teste
         banco = acesso_data_banco()
-        link = banco + "df_resultados/"
+        link = banco + "df_resultados_Sofia/"
         datasets = {i[25:]: load(link + i) for i in os.listdir(link)}
 
-        df_test = load(banco + "test_resultados_classif")
+        df_test = load(banco + "/df_train_predicoes_regressao")
 
         return datasets, df_test
 
@@ -59,10 +58,10 @@ class Paginas:
         """
         # Importando os dados de treino e teste
         banco = acesso_data_banco()
-        df_train = load(banco + "train_resultados_regr")
+        df_train = load(banco + "df_resultados_Sofia/df_train_predicoes_regressao")
         df_train = df_train[df_train.columns[[1, 8, 9, 10, 11]]].copy()
 
-        df_test = load(banco + "test_resultados_regr")
+        df_test = load(banco + "df_resultados_Sofia/df_test_predicoes_regressao")
         df_test = df_test[df_test.columns[[1, 8, 9, 10, 11]]].copy()
 
         return df_train, df_test
@@ -241,10 +240,10 @@ class Paginas:
             with col[0]:
                 # Create a dropdown menu
                 variavel_1 = st.radio(
-                    "Primeira variável:", ["PPD_log", "IFN-γ", "CD3_2"]
+                    "Primeira variável:", ['CD34_log', 'Lin_B']
                 )
                 variavel_2 = st.radio(
-                    "Segunda variável:", ["CD3_2", "PPD_log", "IFN-γ"]
+                    "Segunda variável:", [ 'Lin_T', 'PPD_log']
                 )
 
             resultados, msn_kmenans, msn_dbscan, msn_agg = self.__clustering(
