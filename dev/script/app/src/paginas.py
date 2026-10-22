@@ -58,10 +58,10 @@ class Paginas:
         """
         # Importando os dados de treino e teste
         banco = acesso_data_banco()
-        df_train = load(banco + "df_resultados_Sofia/df_train_predicoes_regressao")
+        df_train = pd.read_csv("/df_train_predicoes_regressao.csv")#######################
         df_train = df_train[df_train.columns[[1, 8, 9, 10, 11]]].copy()
 
-        df_test = load(banco + "df_resultados_Sofia/df_test_predicoes_regressao")
+        df_test = load(banco + "/df_test_predicoes_regressao")
         df_test = df_test[df_test.columns[[1, 8, 9, 10, 11]]].copy()
 
         return df_train, df_test
